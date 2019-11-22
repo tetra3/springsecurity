@@ -2,12 +2,18 @@ package tetra3.com;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import tetra3.com.account.SampleService;
+
 @Controller
 public class SampleController {
+	
+	@Autowired
+	SampleService sampleService;
 	
 	@GetMapping("/")
 	public String index(Model model, Principal principal) {
@@ -29,6 +35,7 @@ public class SampleController {
 	
 	@GetMapping("/dashboard")
 	public String dashboard(Model model, Principal principal) {
+		sampleService.dashboard();
 		model.addAttribute("message","dashboard " + principal.getName());
 		return "dashboard";
 	}
